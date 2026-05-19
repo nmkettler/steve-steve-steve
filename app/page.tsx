@@ -1,0 +1,413 @@
+"use client";
+
+import { ArrowDown } from "lucide-react";
+import {
+  Brain,
+  Wand2,
+  Sparkles,
+  Boxes,
+  AlertTriangle,
+  ClipboardList,
+  Rocket,
+  FolderKanban,
+  FileText,
+  History,
+  Globe,
+  Plug,
+  Palette,
+} from "lucide-react";
+import { DemoRound } from "@/components/DemoRound";
+import { FeatureCard } from "@/components/FeatureCard";
+import { Pitfall } from "@/components/Pitfall";
+import { CopyBlock } from "@/components/CopyBlock";
+import { ModuleGrid, type Module } from "@/components/ModuleGrid";
+
+const cheatSheet = [
+  `Before you answer, ask me 3 clarifying questions`,
+  `Give me three versions: aggressive, balanced, cautious`,
+  `Steelman the opposite view`,
+  `What am I missing?`,
+  `Rewrite this 30% shorter`,
+];
+
+const modules: Module[] = [
+  {
+    id: "mental-model",
+    number: 1,
+    title: "Mental Model",
+    blurb: "Treat Claude like a brilliant new hire on day one.",
+    icon: Brain,
+    content: (
+      <>
+        <p>
+          Treat Claude like a brilliant new hire on day one. Smart, fast,
+          eager — but missing every piece of context that lives in your head,
+          your inbox, and your company&apos;s shared drive. The quality of
+          what you get back is almost entirely a function of what you put in.
+        </p>
+        <p>Two ideas to anchor on:</p>
+        <ul className="ml-5 list-disc space-y-2">
+          <li>
+            <strong>Context beats cleverness.</strong> A specific prompt with
+            real facts always beats a clever prompt with none.
+          </li>
+          <li>
+            <strong>It&apos;s a conversation, not a search box.</strong>{" "}
+            You&apos;re not entering a query — you&apos;re briefing a
+            collaborator. Iterate, push back, ask for revisions.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    id: "prompting-basics",
+    number: 2,
+    title: "Prompting Basics",
+    blurb: "Four ingredients every good prompt has.",
+    icon: Wand2,
+    content: (
+      <>
+        <p>
+          Good prompts have four ingredients. Skip any of them and the output
+          gets generic.
+        </p>
+        <ul className="ml-5 list-disc space-y-2">
+          <li>
+            <strong>Role &amp; context:</strong> who you are, what the company
+            does, what situation you&apos;re in.
+          </li>
+          <li>
+            <strong>The task:</strong> what you want produced, in plain terms.
+          </li>
+          <li>
+            <strong>The facts:</strong> the actual numbers, names, dates, and
+            constraints that make this <em>your</em> task and not a generic
+            one.
+          </li>
+          <li>
+            <strong>Audience, tone, length:</strong> who reads it and what
+            they expect.
+          </li>
+        </ul>
+        <p>
+          The Demo module shows what happens when you go from missing all of
+          these to having all of them.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "demo",
+    number: 3,
+    title: "Demo: Before & After",
+    blurb: "Same prompt, three levels of context. Watch the output jump.",
+    icon: Sparkles,
+    content: (
+      <>
+        <p>
+          <strong>Scenario:</strong> Drafting a board update. Three rounds.
+          Same task. The output quality jumps dramatically as the context
+          improves.
+        </p>
+
+        <div className="space-y-6">
+          <DemoRound
+            number={1}
+            accent="low"
+            title="No context, vanilla prompt"
+            prompt={`Write a board update on how the quarter went.`}
+            response={
+              <>
+                <p className="mb-2 italic text-muted">
+                  Expected response (paraphrased — try it live to see the
+                  actual output):
+                </p>
+                <p>
+                  &ldquo;Dear Board Members, I&apos;m pleased to share an
+                  update on our performance this quarter. We made significant
+                  progress across key initiatives, including product
+                  development, customer acquisition, and operational
+                  efficiency. Revenue trends were positive, and the team
+                  executed well against our strategic priorities. We faced
+                  some challenges in [area], but are taking steps to address
+                  them. Looking ahead, we remain focused on…&rdquo;
+                </p>
+              </>
+            }
+            takeaway={
+              <p>
+                Generic. Could be any company, any quarter. You&apos;d never
+                send this.
+              </p>
+            }
+          />
+
+          <div className="flex justify-center">
+            <ArrowDown size={20} className="text-muted" />
+          </div>
+
+          <DemoRound
+            number={2}
+            accent="mid"
+            title="Same prompt, with prompt engineering"
+            prompt={`Write a board update for Q1 2026. We're a Series B SaaS company, 80 employees, selling workflow software to mid-market legal teams.
+
+Key facts:
+- ARR grew from $8M to $10.2M (28% QoQ)
+- Closed 14 new logos, including two Am Law 100 firms
+- Churn ticked up to 4.2% (from 2.8%) — two enterprise accounts left over integration issues
+- Engineering shipped the Outlook integration 3 weeks late
+- Hired a new VP of Customer Success
+
+Audience: board of 5, including 2 founders, 2 VCs, 1 independent. They're sophisticated — skip the throat-clearing.
+Tone: confident but honest. Don't bury the churn issue.
+Length: 400 words, with clear sections.`}
+            response={
+              <p>
+                A specific, structured 400-word update with real numbers,
+                named segments, the churn issue called out rather than buried,
+                and a forward-looking section. Clean headings. No filler.
+              </p>
+            }
+            takeaway={
+              <p>
+                Way better. Specific, honest, structured. But still — Claude
+                doesn&apos;t know <em>your</em> company.
+              </p>
+            }
+          />
+
+          <div className="flex justify-center">
+            <ArrowDown size={20} className="text-muted" />
+          </div>
+
+          <DemoRound
+            number={3}
+            accent="high"
+            title="Add a Project with context"
+            prompt={`(Set up a Claude Project beforehand with:)
+- Last quarter's actual board deck (or a realistic mock)
+- The company's positioning doc or one-pager
+- A previous board update you liked
+- Custom instructions: "I'm the CEO of [Company]. Write in my voice: direct, lightly self-deprecating, no MBA jargon. Board prefers data over narrative."
+
+Then run the same prompt as Round 2 inside the Project.`}
+            response={
+              <div className="space-y-2">
+                <p>What changes:</p>
+                <ul className="ml-5 list-disc space-y-1">
+                  <li>
+                    It references prior quarter&apos;s commitments and whether
+                    they were hit
+                  </li>
+                  <li>Tone matches the previous update</li>
+                  <li>
+                    Uses internal terminology naturally (product names,
+                    customer segments)
+                  </li>
+                  <li>
+                    Compares this quarter&apos;s numbers to last quarter&apos;s
+                    stated goals
+                  </li>
+                </ul>
+              </div>
+            }
+            takeaway={
+              <p>
+                This is the &ldquo;aha&rdquo; moment. Same prompt. Wildly
+                different output. Because the model finally has the context a
+                chief of staff would have.
+              </p>
+            }
+          />
+        </div>
+      </>
+    ),
+  },
+  {
+    id: "claude-features",
+    number: 4,
+    title: "Claude Features",
+    blurb: "The pieces of Claude worth knowing as an executive.",
+    icon: Boxes,
+    content: (
+      <>
+        <p>
+          You don&apos;t need to master all of them — knowing they exist is
+          half the battle.
+        </p>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <FeatureCard icon={FolderKanban} title="Projects">
+            Persistent context across chats — upload once, reference forever.
+            Custom instructions per project (different voice for board vs.
+            customer-facing). Good rule: one project per recurring workflow
+            (board updates, hiring, weekly team email).
+          </FeatureCard>
+
+          <FeatureCard icon={FileText} title="Artifacts">
+            Claude can produce real deliverables: Word docs, Excel files,
+            PowerPoint, PDFs. Also interactive things — working calculators,
+            dashboards, mini web apps. You can iterate on them in-chat
+            (&ldquo;make the chart blue, add a column for margin&rdquo;).
+          </FeatureCard>
+
+          <FeatureCard icon={History} title="Memory & chat history">
+            Claude can search past conversations if you enable it in
+            settings. Useful for: &ldquo;what was that framework we discussed
+            last month for prioritizing hires?&rdquo;
+          </FeatureCard>
+
+          <FeatureCard icon={Globe} title="Web search & current info">
+            Claude will search the web when needed — recent news, current
+            prices, who&apos;s CEO of X. You don&apos;t need to tell it to
+            search; it decides.
+          </FeatureCard>
+
+          <FeatureCard icon={Plug} title="Connectors (the agent stuff)">
+            Claude can connect to Gmail, Calendar, Drive, Slack.
+            &ldquo;Summarize unread emails from my board&rdquo; or
+            &ldquo;what&apos;s on my calendar Thursday and what should I prep
+            for.&rdquo; Claude in Chrome — browses the web on your behalf.
+            Claude in Excel — works inside the spreadsheet.
+          </FeatureCard>
+
+          <FeatureCard icon={Palette} title="Styles">
+            You can save writing styles (e.g., paste 3 of your own memos,
+            Claude learns your voice). Toggle on/off per chat.
+          </FeatureCard>
+        </div>
+      </>
+    ),
+  },
+  {
+    id: "common-pitfalls",
+    number: 5,
+    title: "Common Pitfalls",
+    blurb: "Things that trip executives up.",
+    icon: AlertTriangle,
+    content: (
+      <div className="space-y-4">
+        <Pitfall title="Claude can be confidently wrong">
+          Claude can be confidently wrong on numbers and citations — verify
+          anything load-bearing.
+        </Pitfall>
+
+        <Pitfall title="Watch what you paste">
+          Don&apos;t paste anything you wouldn&apos;t put in a Google Doc on a
+          work account.
+        </Pitfall>
+
+        <Pitfall title="Long chats degrade">
+          Long chats get worse over time — start fresh chats for new topics.
+        </Pitfall>
+
+        <Pitfall title="Iterate, don't restart">
+          If output is off, don&apos;t restart — tell it what to fix.
+          It&apos;s a conversation.
+        </Pitfall>
+      </div>
+    ),
+  },
+  {
+    id: "cheat-sheet",
+    number: 6,
+    title: "Prompting Cheat Sheet",
+    blurb: "Five moves worth memorizing. Copy and paste.",
+    icon: ClipboardList,
+    content: (
+      <>
+        <p>
+          Five moves worth memorizing. Paste them into any conversation when
+          the output isn&apos;t landing.
+        </p>
+        <div className="space-y-3">
+          {cheatSheet.map((line) => (
+            <CopyBlock key={line} text={line} />
+          ))}
+        </div>
+      </>
+    ),
+  },
+  {
+    id: "use-cases",
+    number: 7,
+    title: "Use Cases to Try",
+    blurb: "Pick one. Spend 15 minutes. The rest follows.",
+    icon: Rocket,
+    content: (
+      <>
+        <p>
+          The fastest way to internalize all of this is to use it on real work
+          this week. A few starting points:
+        </p>
+        <ul className="ml-5 list-disc space-y-2">
+          <li>
+            <strong>Board update Project</strong> — load last quarter&apos;s
+            deck and a prior update you liked, then draft this quarter&apos;s.
+          </li>
+          <li>
+            <strong>Weekly team email</strong> — save a Style from your last
+            three, then have Claude draft Monday&apos;s.
+          </li>
+          <li>
+            <strong>Hiring scorecard</strong> — paste the job spec, ask for
+            three versions: aggressive, balanced, cautious.
+          </li>
+          <li>
+            <strong>Pre-meeting prep</strong> — connect Calendar and ask:
+            &ldquo;what&apos;s on my calendar Thursday and what should I prep
+            for.&rdquo;
+          </li>
+          <li>
+            <strong>Inbox triage</strong> — &ldquo;summarize unread emails
+            from my board.&rdquo;
+          </li>
+        </ul>
+      </>
+    ),
+  },
+];
+
+export default function Home() {
+  return (
+    <div id="top" className="min-h-screen">
+      <main>
+        <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
+          {/* Hero */}
+          <section className="pt-20 pb-14 sm:pt-28 lg:pt-32">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-default bg-surface px-3 py-1 text-xs font-medium text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              A training reference
+            </div>
+            <h1
+              className="mb-6 font-display text-6xl font-normal leading-[1.02] tracking-tight sm:text-7xl lg:text-[6.5rem]"
+              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 50' }}
+            >
+              Steve <em className="italic font-light">Steve</em> Steve
+            </h1>
+            <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+              A practical guide to getting real work done with Claude.
+            </p>
+            <a
+              href="#modules"
+              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-hover"
+            >
+              Start with the mental model
+              <ArrowDown size={16} />
+            </a>
+          </section>
+
+          <div id="modules" className="scroll-mt-8 pb-20">
+            <ModuleGrid modules={modules} />
+          </div>
+
+          <footer className="border-t border-default py-10 text-sm text-muted">
+            Built for [friend&apos;s name].
+          </footer>
+        </div>
+      </main>
+    </div>
+  );
+}
