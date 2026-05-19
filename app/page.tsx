@@ -9,7 +9,6 @@ import {
   Wrench,
   AlertTriangle,
   ClipboardList,
-  Rocket,
   FolderKanban,
   FileText,
   History,
@@ -482,44 +481,6 @@ Then run the same prompt as Round 2 inside the Project.`}
             <CopyBlock key={line} text={line} />
           ))}
         </div>
-      </>
-    ),
-  },
-  {
-    id: "use-cases",
-    number: 8,
-    title: "Where to start this week",
-    blurb: "Pick one. Spend 15 minutes. The rest follows.",
-    icon: Rocket,
-    content: (
-      <>
-        <p>
-          The fastest way to internalize all of this is to use it on real work
-          this week. A few starting points:
-        </p>
-        <ul className="ml-5 list-disc space-y-2">
-          <li>
-            <strong>Board update Project</strong> — load last quarter&apos;s
-            deck and a prior update you liked, then draft this quarter&apos;s.
-          </li>
-          <li>
-            <strong>Weekly team email</strong> — save a Style from your last
-            three, then have Claude draft Monday&apos;s.
-          </li>
-          <li>
-            <strong>Hiring scorecard</strong> — paste the job spec, ask for
-            three versions: aggressive, balanced, cautious.
-          </li>
-          <li>
-            <strong>Pre-meeting prep</strong> — connect Calendar and ask:
-            &ldquo;what&apos;s on my calendar Thursday and what should I prep
-            for.&rdquo;
-          </li>
-          <li>
-            <strong>Inbox triage</strong> — &ldquo;summarize unread emails
-            from my board.&rdquo;
-          </li>
-        </ul>
       </>
     ),
   },
