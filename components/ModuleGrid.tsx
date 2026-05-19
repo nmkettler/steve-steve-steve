@@ -27,7 +27,7 @@ export function ModuleGrid({ modules }: { modules: Module[] }) {
   return (
     <div className="space-y-10">
       <div>
-        <h2 className="mb-1 font-display text-3xl font-normal tracking-tight">
+        <h2 className="mb-1 text-2xl font-semibold tracking-tight">
           The modules
         </h2>
         <p className="mb-6 text-sm text-muted">
@@ -86,7 +86,7 @@ export function ModuleGrid({ modules }: { modules: Module[] }) {
               <div className="mb-2 text-xs font-medium uppercase tracking-wide text-accent">
                 Module 0{active.number}
               </div>
-              <h2 className="font-display text-4xl font-normal tracking-tight sm:text-5xl">
+              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
                 {active.title}
               </h2>
             </div>

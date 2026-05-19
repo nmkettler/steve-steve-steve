@@ -6,6 +6,7 @@ import {
   Wand2,
   Sparkles,
   Boxes,
+  Wrench,
   AlertTriangle,
   ClipboardList,
   Rocket,
@@ -34,8 +35,8 @@ const modules: Module[] = [
   {
     id: "mental-model",
     number: 1,
-    title: "Mental Model",
-    blurb: "Treat Claude like a brilliant new hire on day one.",
+    title: "How to think about Claude",
+    blurb: "Treat it like a brilliant new hire on day one.",
     icon: Brain,
     content: (
       <>
@@ -63,8 +64,8 @@ const modules: Module[] = [
   {
     id: "prompting-basics",
     number: 2,
-    title: "Prompting Basics",
-    blurb: "Four ingredients every good prompt has.",
+    title: "What makes a good prompt",
+    blurb: "The four ingredients every good prompt has.",
     icon: Wand2,
     content: (
       <>
@@ -100,8 +101,8 @@ const modules: Module[] = [
   {
     id: "demo",
     number: 3,
-    title: "Demo: Before & After",
-    blurb: "Same prompt, three levels of context. Watch the output jump.",
+    title: "Same prompt, three levels of context",
+    blurb: "Watch the output quality jump from generic to genuinely useful.",
     icon: Sparkles,
     content: (
       <>
@@ -228,8 +229,8 @@ Then run the same prompt as Round 2 inside the Project.`}
   {
     id: "claude-features",
     number: 4,
-    title: "Claude Features",
-    blurb: "The pieces of Claude worth knowing as an executive.",
+    title: "Features worth knowing",
+    blurb: "Projects, artifacts, memory, web search, connectors, styles.",
     icon: Boxes,
     content: (
       <>
@@ -282,10 +283,76 @@ Then run the same prompt as Round 2 inside the Project.`}
     ),
   },
   {
-    id: "common-pitfalls",
+    id: "skills",
     number: 5,
-    title: "Common Pitfalls",
-    blurb: "Things that trip executives up.",
+    title: "Skills: spin up an agent for everything",
+    blurb: "Build a specialist once, run it forever.",
+    icon: Wrench,
+    content: (
+      <>
+        <p>
+          The executives getting the most out of Claude don&apos;t just chat
+          with it — they build <strong>Skills</strong>. A Skill is a small,
+          named agent with its own instructions, files, and scope. You
+          invoke it with a slash command and it runs that workflow exactly
+          the way you want, every time.
+        </p>
+        <p>
+          The mental shift: stop treating Claude as one general assistant.
+          Treat it as a <strong>team of specialists</strong> you&apos;ve
+          each trained for a specific recurring task. That&apos;s the
+          instinct behind &ldquo;spin up an agent for everything&rdquo; —
+          every job you do more than twice is a Skill waiting to be built.
+        </p>
+        <p>Worth spinning up a Skill for:</p>
+        <ul className="ml-5 list-disc space-y-2">
+          <li>
+            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
+              /board-update
+            </code>{" "}
+            — pulls last quarter&apos;s deck and drafts the new one in your
+            voice
+          </li>
+          <li>
+            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
+              /weekly-readout
+            </code>{" "}
+            — turns raw bullets into your team email
+          </li>
+          <li>
+            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
+              /competitor-scan
+            </code>{" "}
+            — checks named competitors&apos; sites weekly for changes and
+            news
+          </li>
+          <li>
+            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
+              /call-debrief
+            </code>{" "}
+            — turns a transcript into a CRM-ready summary
+          </li>
+          <li>
+            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
+              /hiring-rubric
+            </code>{" "}
+            — generates a scorecard for any role from your standard rubric
+          </li>
+        </ul>
+        <p>
+          The compounding return on Claude isn&apos;t in being a better
+          prompter. It&apos;s in building Skills for everything you do more
+          than once. If you catch yourself prompting from scratch on the
+          same kind of task — that&apos;s the signal to build a Skill.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "common-pitfalls",
+    number: 6,
+    title: "Mistakes that trip executives up",
+    blurb: "Where Claude lets you down — and how to dodge it.",
     icon: AlertTriangle,
     content: (
       <div className="space-y-4">
@@ -312,9 +379,9 @@ Then run the same prompt as Round 2 inside the Project.`}
   },
   {
     id: "cheat-sheet",
-    number: 6,
-    title: "Prompting Cheat Sheet",
-    blurb: "Five moves worth memorizing. Copy and paste.",
+    number: 7,
+    title: "Phrases to fix bad output",
+    blurb: "Five copy-paste moves worth memorizing.",
     icon: ClipboardList,
     content: (
       <>
@@ -332,8 +399,8 @@ Then run the same prompt as Round 2 inside the Project.`}
   },
   {
     id: "use-cases",
-    number: 7,
-    title: "Use Cases to Try",
+    number: 8,
+    title: "Where to start this week",
     blurb: "Pick one. Spend 15 minutes. The rest follows.",
     icon: Rocket,
     content: (
@@ -376,16 +443,9 @@ export default function Home() {
       <main>
         <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
           {/* Hero */}
-          <section className="pt-20 pb-14 sm:pt-28 lg:pt-32">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-default bg-surface px-3 py-1 text-xs font-medium text-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              A training reference
-            </div>
-            <h1
-              className="mb-6 font-display text-6xl font-normal leading-[1.02] tracking-tight sm:text-7xl lg:text-[6.5rem]"
-              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 50' }}
-            >
-              Steve <em className="italic font-light">Steve</em> Steve
+          <section className="pt-24 pb-14 sm:pt-32 lg:pt-40">
+            <h1 className="mb-6 text-6xl font-semibold leading-[1.02] tracking-[-0.04em] sm:text-7xl lg:text-[7rem]">
+              Steve Steve Steve
             </h1>
             <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
               A practical guide to getting real work done with Claude.
