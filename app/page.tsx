@@ -496,15 +496,15 @@ Then run the same prompt as Round 2 inside the Project.`}
 
 export default function Home() {
   return (
-    <div id="top" className="min-h-screen">
+    <div id="top" className="min-h-screen overflow-x-hidden">
       <main>
         <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
           {/* Hero */}
-          <section className="relative isolate pt-10 pb-16 sm:pt-14 lg:pt-20">
+          <section className="relative isolate pt-10 pb-12 sm:pt-14 sm:pb-16 lg:pt-20">
             {/* Flourish: warm accent aura + subtle grain */}
             <div
               aria-hidden
-              className="pointer-events-none absolute -top-24 -left-32 -z-10 h-[560px] w-[640px] rounded-full opacity-70 blur-3xl"
+              className="pointer-events-none absolute -top-16 -left-16 -z-10 h-[360px] w-[360px] rounded-full opacity-70 blur-3xl sm:-top-24 sm:-left-32 sm:h-[560px] sm:w-[640px]"
               style={{
                 background:
                   "radial-gradient(closest-side, rgba(217,119,87,0.22), transparent)",
@@ -519,10 +519,10 @@ export default function Home() {
               }}
             />
 
-            <h1 className="mb-6 text-6xl font-semibold leading-[1.02] tracking-[-0.04em] sm:text-7xl lg:text-[7rem]">
+            <h1 className="mb-5 text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.04em] sm:mb-6 sm:text-6xl md:text-7xl lg:text-[7rem]">
               Steve Steve Steve
             </h1>
-            <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+            <p className="mb-8 max-w-2xl text-base leading-relaxed text-muted sm:mb-10 sm:text-lg md:text-xl">
               A practical guide to getting real work done with Claude.
             </p>
             <a

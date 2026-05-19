@@ -29,7 +29,7 @@ export function CopyBlock({
           {label}
         </div>
       )}
-      <pre className="overflow-x-auto px-4 py-3 pr-12 font-mono text-sm leading-relaxed text-[color:var(--foreground)]">
+      <pre className="whitespace-pre-wrap break-words px-4 py-3 pr-14 font-mono text-sm leading-relaxed text-[color:var(--foreground)]">
         {text}
       </pre>
       <button

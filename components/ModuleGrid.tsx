@@ -79,23 +79,24 @@ export function ModuleGrid({ modules }: { modules: Module[] }) {
       {active && (
         <div
           ref={panelRef}
-          className="scroll-mt-8 rounded-2xl border border-default bg-[color:var(--background)] p-6 shadow-sm sm:p-10"
+          className="scroll-mt-8 rounded-2xl border border-default bg-[color:var(--background)] p-5 shadow-sm sm:p-8 lg:p-10"
         >
-          <div className="mb-6 flex items-center justify-between gap-4">
-            <div>
+          <div className="mb-6 flex items-start justify-between gap-3 sm:gap-4">
+            <div className="min-w-0 flex-1">
               <div className="mb-2 text-xs font-medium uppercase tracking-wide text-accent">
                 Module 0{active.number}
               </div>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
                 {active.title}
               </h2>
             </div>
             <button
               onClick={() => setActiveId(null)}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-default bg-[color:var(--background)] px-3 py-2 text-xs font-medium text-muted transition-colors hover:bg-surface hover:text-[color:var(--foreground)]"
+              aria-label="Close module"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-default bg-[color:var(--background)] px-2.5 py-2 text-xs font-medium text-muted transition-colors hover:bg-surface hover:text-[color:var(--foreground)] sm:px-3"
             >
               <ArrowLeft size={14} />
-              Close
+              <span className="hidden sm:inline">Close</span>
             </button>
           </div>
 
@@ -103,10 +104,10 @@ export function ModuleGrid({ modules }: { modules: Module[] }) {
             {active.content}
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-default pt-6">
+          <div className="mt-10 flex flex-col-reverse items-stretch gap-3 border-t border-default pt-6 sm:flex-row sm:items-center sm:justify-between">
             <button
               onClick={() => setActiveId(null)}
-              className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-[color:var(--foreground)]"
+              className="inline-flex items-center justify-center gap-1.5 text-sm text-muted transition-colors hover:text-[color:var(--foreground)] sm:justify-start"
             >
               <ArrowLeft size={14} />
               Back to modules
@@ -119,9 +120,12 @@ export function ModuleGrid({ modules }: { modules: Module[] }) {
               return (
                 <button
                   onClick={() => setActiveId(next.id)}
-                  className="inline-flex items-center gap-1.5 rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
                 >
-                  Next: {next.title}
+                  <span className="sm:hidden">Next module</span>
+                  <span className="hidden sm:inline">
+                    Next: {next.title}
+                  </span>
                 </button>
               );
             })()}
