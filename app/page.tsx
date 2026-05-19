@@ -347,8 +347,16 @@ Then run the same prompt as Round 2 inside the Project.`}
               exactly like briefing a new chief of staff.
             </li>
             <li>
-              <strong>Create the Skill in Claude.</strong> Open Skills
-              (under Settings), name it (that name becomes the slash
+              <strong>Create the Skill in Claude.</strong> Go to{" "}
+              <a
+                href="https://claude.ai/customize/connectors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[13px] text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent"
+              >
+                claude.ai/customize/connectors
+              </a>{" "}
+              and create a new Skill. Name it (that name becomes the slash
               command), paste your brief as the instructions, and attach
               any reference files — templates, style guides, prior
               examples, your positioning doc.
