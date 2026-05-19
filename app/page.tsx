@@ -31,6 +31,34 @@ const cheatSheet = [
   `Rewrite this 30% shorter`,
 ];
 
+function SkillCategory({
+  label,
+  items,
+}: {
+  label: string;
+  items: [string, string][];
+}) {
+  return (
+    <div className="rounded-xl border border-default bg-surface/50 p-5">
+      <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">
+        {label}
+      </div>
+      <ul className="space-y-2">
+        {items.map(([cmd, desc]) => (
+          <li key={cmd} className="flex flex-col gap-1 sm:flex-row sm:gap-3">
+            <code className="shrink-0 self-start rounded bg-[color:var(--background)] px-1.5 py-0.5 font-mono text-[13px] text-accent">
+              {cmd}
+            </code>
+            <span className="text-sm leading-relaxed text-[color:var(--foreground)]">
+              {desc}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 const modules: Module[] = [
   {
     id: "mental-model",
@@ -291,7 +319,7 @@ Then run the same prompt as Round 2 inside the Project.`}
     content: (
       <>
         <p>
-          The executives getting the most out of Claude don&apos;t just chat
+          The people getting the most out of Claude don&apos;t just chat
           with it — they build <strong>Skills</strong>. A Skill is a small,
           named agent with its own instructions, files, and scope. You
           invoke it with a slash command and it runs that workflow exactly
@@ -304,41 +332,101 @@ Then run the same prompt as Round 2 inside the Project.`}
           instinct behind &ldquo;spin up an agent for everything&rdquo; —
           every job you do more than twice is a Skill waiting to be built.
         </p>
-        <p>Worth spinning up a Skill for:</p>
-        <ul className="ml-5 list-disc space-y-2">
-          <li>
-            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
-              /board-update
-            </code>{" "}
-            — pulls last quarter&apos;s deck and drafts the new one in your
-            voice
-          </li>
-          <li>
-            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
-              /weekly-readout
-            </code>{" "}
-            — turns raw bullets into your team email
-          </li>
-          <li>
-            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
-              /competitor-scan
-            </code>{" "}
-            — checks named competitors&apos; sites weekly for changes and
-            news
-          </li>
-          <li>
-            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
-              /call-debrief
-            </code>{" "}
-            — turns a transcript into a CRM-ready summary
-          </li>
-          <li>
-            <code className="rounded bg-surface px-1.5 py-0.5 font-mono text-[13px]">
-              /hiring-rubric
-            </code>{" "}
-            — generates a scorecard for any role from your standard rubric
-          </li>
-        </ul>
+
+        <div className="rounded-xl border border-default bg-surface/50 p-5 sm:p-6">
+          <h3 className="mb-4 text-base font-semibold tracking-tight">
+            How to build one
+          </h3>
+          <ol className="ml-5 list-decimal space-y-3">
+            <li>
+              <strong>Pick something you do more than once.</strong> The
+              recurring stuff is where Skills pay off.
+            </li>
+            <li>
+              <strong>Brief it.</strong> Write down the task, the context
+              the Skill needs, and what the output should look like —
+              exactly like briefing a new chief of staff.
+            </li>
+            <li>
+              <strong>Create the Skill in Claude.</strong> Open Skills
+              (under Settings), name it (that name becomes the slash
+              command), paste your brief as the instructions, and attach
+              any reference files — templates, style guides, prior
+              examples, your positioning doc.
+            </li>
+            <li>
+              <strong>Test, fix, iterate.</strong> Run it on a real task.
+              Tell the Skill what to change. Update the instructions.
+              Repeat until it nails it.
+            </li>
+            <li>
+              <strong>From now on, just type the slash command.</strong>{" "}
+              The Skill runs with all that context every time, no
+              re-prompting needed.
+            </li>
+          </ol>
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            Tip: the hard part is step 2 — writing the brief. If you can
+            describe the job to a person, you can write a Skill. If you
+            can&apos;t, that&apos;s a sign the job isn&apos;t crisp enough
+            yet.
+          </p>
+        </div>
+
+        <div className="space-y-5">
+          <SkillCategory
+            label="Communications & writing"
+            items={[
+              ["/board-update", "pulls last quarter's deck and drafts the new one in your voice"],
+              ["/weekly-readout", "turns raw bullets into your team email"],
+              ["/call-debrief", "turns a meeting transcript into a CRM-ready summary"],
+              ["/thank-you-note", "quick personalized follow-up notes after meetings"],
+              ["/linkedin-reply", "drafts responses to incoming InMail in your voice"],
+              ["/memo-from-notes", "turns rough handwritten notes into a polished one-pager"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Research & analysis"
+            items={[
+              ["/competitor-scan", "checks named competitors' sites weekly for changes and news"],
+              ["/pricing-research", "pulls competitor pricing pages and summarizes the deltas"],
+              ["/news-brief", "daily AI / industry news roundup, filtered to what matters to you"],
+              ["/company-dossier", "one-page brief on any company before a meeting or call"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Hiring & team"
+            items={[
+              ["/hiring-rubric", "generates a scorecard for any role from your standard rubric"],
+              ["/jd-writer", "writes a job description in your house style"],
+              ["/1on1-prep", "summarizes the last few weeks for a direct report before your 1:1"],
+              ["/reference-call", "generates tailored questions for a reference check"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Decisions & thinking"
+            items={[
+              ["/steelman", "argues both sides of any decision you're weighing"],
+              ["/pre-mortem", "imagines the plan failing and lists the top failure modes"],
+              ["/three-versions", "gives you aggressive, balanced, and cautious takes on a choice"],
+              ["/what-am-i-missing", "stress-tests a plan or memo for blind spots"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Daily workflow"
+            items={[
+              ["/inbox-triage", "sorts unread email and flags only what genuinely needs you"],
+              ["/calendar-prep", "tells you what's on tomorrow and what to prep for each meeting"],
+              ["/weekly-review", "summarizes your week from calendar + email + Slack"],
+              ["/expense-categorize", "classifies receipts into your accounting categories"],
+            ]}
+          />
+        </div>
+
         <p>
           The compounding return on Claude isn&apos;t in being a better
           prompter. It&apos;s in building Skills for everything you do more
@@ -351,7 +439,7 @@ Then run the same prompt as Round 2 inside the Project.`}
   {
     id: "common-pitfalls",
     number: 6,
-    title: "Mistakes that trip executives up",
+    title: "Mistakes that trip people up",
     blurb: "Where Claude lets you down — and how to dodge it.",
     icon: AlertTriangle,
     content: (
