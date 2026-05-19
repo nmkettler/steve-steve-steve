@@ -500,7 +500,25 @@ export default function Home() {
       <main>
         <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
           {/* Hero */}
-          <section className="pt-24 pb-14 sm:pt-32 lg:pt-40">
+          <section className="relative isolate pt-10 pb-16 sm:pt-14 lg:pt-20">
+            {/* Flourish: warm accent aura + subtle grain */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-24 -left-32 -z-10 h-[560px] w-[640px] rounded-full opacity-70 blur-3xl"
+              style={{
+                background:
+                  "radial-gradient(closest-side, rgba(217,119,87,0.22), transparent)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06] mix-blend-multiply"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
+              }}
+            />
+
             <h1 className="mb-6 text-6xl font-semibold leading-[1.02] tracking-[-0.04em] sm:text-7xl lg:text-[7rem]">
               Steve Steve Steve
             </h1>
