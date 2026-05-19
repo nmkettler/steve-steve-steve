@@ -257,7 +257,7 @@ Then run the same prompt as Round 2 inside the Project.`}
     id: "claude-features",
     number: 4,
     title: "Features worth knowing",
-    blurb: "Projects, artifacts, memory, web search, connectors, styles.",
+    blurb: "Projects, memory, web search, connectors, styles.",
     icon: Boxes,
     content: (
       <>
@@ -272,13 +272,6 @@ Then run the same prompt as Round 2 inside the Project.`}
             Custom instructions per project (different voice for board vs.
             customer-facing). Good rule: one project per recurring workflow
             (board updates, hiring, weekly team email).
-          </FeatureCard>
-
-          <FeatureCard icon={FileText} title="Artifacts">
-            Claude can produce real deliverables: Word docs, Excel files,
-            PowerPoint, PDFs. Also interactive things — working calculators,
-            dashboards, mini web apps. You can iterate on them in-chat
-            (&ldquo;make the chart blue, add a column for margin&rdquo;).
           </FeatureCard>
 
           <FeatureCard icon={History} title="Memory & chat history">
@@ -310,8 +303,159 @@ Then run the same prompt as Round 2 inside the Project.`}
     ),
   },
   {
-    id: "skills",
+    id: "artifacts",
     number: 5,
+    title: "Artifacts: real deliverables, not just text",
+    blurb: "Have Claude build the doc, deck, or tool — not just describe it.",
+    icon: FileText,
+    content: (
+      <>
+        <p>
+          Most people use Claude like a chatbot: ask a question, get text,
+          copy that text into a Google Doc or Excel.{" "}
+          <strong>Artifacts</strong> are how you skip that step. Claude
+          builds the actual file — Word doc, spreadsheet, slide deck, PDF,
+          or a working interactive tool — right inside the chat. You
+          iterate on it live and download the finished thing.
+        </p>
+
+        <p>
+          The mental shift: stop treating Claude as a writer who hands you
+          text to paste somewhere. Treat it as a <strong>builder</strong>.
+          The output isn&apos;t the message — the output is the thing you
+          actually needed.
+        </p>
+
+        <div className="rounded-xl border border-default bg-surface/50 p-5 sm:p-6">
+          <h3 className="mb-4 text-base font-semibold tracking-tight">
+            How to make one
+          </h3>
+          <ol className="ml-5 list-decimal space-y-3">
+            <li>
+              <strong>Ask for the artifact, not the words.</strong> Say
+              &ldquo;make me an Excel file&rdquo; or &ldquo;build a
+              one-pager I can send to investors,&rdquo; not &ldquo;draft a
+              board update.&rdquo; The verb does the work.
+            </li>
+            <li>
+              <strong>Be specific about the form.</strong> Columns and
+              formulas for a spreadsheet, sections and word count for a
+              doc, slide titles for a deck, inputs and outputs for an
+              interactive tool. The more concrete the brief, the closer
+              the first draft.
+            </li>
+            <li>
+              <strong>Iterate in chat.</strong> &ldquo;Add a column for
+              margin.&rdquo; &ldquo;Make the chart blue.&rdquo;
+              &ldquo;Cut this section to 100 words.&rdquo; Each turn
+              updates the artifact in place — you don&apos;t start over.
+            </li>
+            <li>
+              <strong>Download or share.</strong> Click the download icon
+              on the artifact. You get the actual file —{" "}
+              <code className="rounded bg-[color:var(--background)] px-1 py-0.5 font-mono text-[12px]">
+                .xlsx
+              </code>
+              ,{" "}
+              <code className="rounded bg-[color:var(--background)] px-1 py-0.5 font-mono text-[12px]">
+                .pptx
+              </code>
+              ,{" "}
+              <code className="rounded bg-[color:var(--background)] px-1 py-0.5 font-mono text-[12px]">
+                .docx
+              </code>
+              ,{" "}
+              <code className="rounded bg-[color:var(--background)] px-1 py-0.5 font-mono text-[12px]">
+                .pdf
+              </code>
+              , or a hosted HTML page.
+            </li>
+            <li>
+              <strong>Save the chat as a Project</strong> if you&apos;ll
+              do this again — say, a monthly investor letter — so the
+              template, voice, and tone carry forward every time.
+            </li>
+          </ol>
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            Tip: the difference between a great artifact and a generic
+            one is specificity. &ldquo;Build me a deck&rdquo; gets you a
+            template. &ldquo;Build a 6-slide board deck with these
+            sections, in a minimalist style, with a chart on slide 3
+            showing ARR growth&rdquo; gets you something close to
+            finished.
+          </p>
+        </div>
+
+        <div className="space-y-5">
+          <SkillCategory
+            label="Documents"
+            items={[
+              ["board-memo.docx", "turns a bullet list into a polished board memo in your voice"],
+              ["one-pager.pdf", "investor or customer one-pager with positioning, traction, ask"],
+              ["investor-update.docx", "monthly investor letter from your raw numbers and notes"],
+              ["faq.docx", "customer-facing FAQ from a list of raw questions"],
+              ["press-release.docx", "house-style press release for any announcement"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Spreadsheets"
+            items={[
+              ["runway-model.xlsx", "ARR + burn projection with editable assumptions and scenarios"],
+              ["hiring-scorecard.xlsx", "weighted scorecard for any role from your standard rubric"],
+              ["pipeline-tracker.xlsx", "sales pipeline by stage with probability-weighted forecasts"],
+              ["decision-matrix.xlsx", "score options against weighted criteria — pick a vendor, a hire, a market"],
+              ["budget-vs-actuals.xlsx", "tracks plan vs. actual by line item with variance"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Slides"
+            items={[
+              ["board-deck.pptx", "turns your board memo into a 6–10 slide deck"],
+              ["all-hands.pptx", "monthly all-hands deck with your standard sections"],
+              ["customer-pitch.pptx", "pitch deck draft customized for a named customer"],
+              ["offsite-deck.pptx", "strategy off-site materials from a topic outline"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Interactive tools (run in the chat)"
+            items={[
+              ["pricing-calculator", "live ROI calculator with editable inputs for a sales call"],
+              ["decision-tree", "clickable decision tree for a recurring judgment call"],
+              ["quote-generator", "fill in customer details, get a quote on the spot"],
+              ["data-explorer", "paste in numbers, get the chart and a written summary"],
+              ["weekly-dashboard", "a custom KPI dashboard from a small CSV"],
+            ]}
+          />
+
+          <SkillCategory
+            label="Diagrams & visualizations"
+            items={[
+              ["org-chart", "from a list of people, roles, and reporting lines"],
+              ["process-diagram", "from a description of a workflow or approval flow"],
+              ["customer-journey-map", "from a list of touchpoints and friction points"],
+              ["timeline", "from a project plan or a launch sequence"],
+            ]}
+          />
+        </div>
+
+        <p>
+          The shift here is recognizing that Claude&apos;s output can be
+          the final deliverable, not raw material for one. Anything
+          you&apos;d normally hand to a contractor, intern, or junior
+          employee — Claude can prototype in under a minute. Within a
+          week, you&apos;ll catch yourself stopping mid-task because you
+          realize you don&apos;t need to &ldquo;clean this up later&rdquo;
+          anymore.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "skills",
+    number: 6,
     title: "Skills: spin up an agent for everything",
     blurb: "Build a specialist once, run it forever.",
     icon: Wrench,
@@ -445,7 +589,7 @@ Then run the same prompt as Round 2 inside the Project.`}
   },
   {
     id: "common-pitfalls",
-    number: 6,
+    number: 7,
     title: "Mistakes that trip people up",
     blurb: "Where Claude lets you down — and how to dodge it.",
     icon: AlertTriangle,
@@ -474,7 +618,7 @@ Then run the same prompt as Round 2 inside the Project.`}
   },
   {
     id: "cheat-sheet",
-    number: 7,
+    number: 8,
     title: "Phrases to fix bad output",
     blurb: "Five copy-paste moves worth memorizing.",
     icon: ClipboardList,
